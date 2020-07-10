@@ -20,3 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::middleware('auth')->get('/pertanyaan', 'PertanyaanController@index');
 Route::middleware('auth')->get('/pertanyaan/create', 'PertanyaanController@create');
 Route::middleware('auth')->post('/pertanyaan', 'PertanyaanController@store');
+Route::middleware('auth')->get('/pertanyaan/{id}', 'PertanyaanController@show');
+Route::middleware('auth')->get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
+Route::middleware('auth')->put('/pertanyaan/{id}', 'PertanyaanController@update');
+Route::middleware('auth')->delete('/pertanyaan/{id}', 'PertanyaanController@destroy');

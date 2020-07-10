@@ -3,15 +3,13 @@
 @section('content')
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Buat Pertanyaan Baru</h6>
-        </div>
         <div class="card-body">
-            <form action="/pertanyaan" method="POST">
+            <form action="/pertanyaan/{{ $tanya->id }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="form-group">
                     <label for="judul">Judul</label>
-                    <input type="text" class="form-control" placeholder="Judul pertanyaan ..." name="judul" id="judul">
+                    <input type="text" class="form-control" value="{{ $tanya->judul }}" placeholder="Judul pertanyaan ..." name="judul" id="judul">
 
                     @if($errors->has('judul'))
                         <div class="text-danger">
@@ -21,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="isi">Isi</label>
-                    <textarea class="form-control my-editor" placeholder="Isi pertanyaan ..." name="isi" id="isi" rows="6"></textarea>
+                    <textarea class="form-control my-editor" placeholder="Isi pertanyaan ..." name="isi" id="isi" rows="6">{{ $tanya->isi }}</textarea>
 
                     @if($errors->has('isi'))
                         <div class="text-danger">
@@ -31,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="tag">Tag</label>
-                    <input type="text" class="form-control" placeholder="Tambahkan tag ..." name="tag" id="tag">
+                    <input type="text" class="form-control" value="{{ $tanya->tag }}" placeholder="Tambahkan tag ..." name="tag" id="tag">
 
                     @if($errors->has('tag'))
                         <div class="text-danger">
@@ -40,11 +38,11 @@
                     @endif
                 </div>
                 <button type="submit" style="width: auto" class="btn btn-primary btn-user btn-block">
-                    Buat pertanyaan
+                    Sunting pertanyaan
                 </button>
-                <a href="/pertanyaan" style="width: 7%" class="btn btn-danger btn-user btn-block">
+                <button onclick="window.location.href='/pertanyaan'" style="width: auto" class="btn btn-danger btn-user btn-block">
                     Batal
-                </a>
+                </button>
             </form>
         </div>
     </div>

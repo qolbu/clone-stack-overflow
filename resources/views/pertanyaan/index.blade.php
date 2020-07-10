@@ -23,7 +23,7 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $value->judul }}</td>
-                                <td>{{ $value->isi }}</td>
+                                <td>{!! $value->isi !!}</td>
                                 <td>{{ $value->tag }}</td>
                                 <td>
                                     <a href="/pertanyaan/{{ $value->id }}" class="btn btn-sm btn-info">Tampilkan</a>
