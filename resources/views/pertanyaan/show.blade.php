@@ -9,10 +9,10 @@
             <p>{!! $tanya->isi !!}</p>
         </div>
         <div class="col-sm-2 mb-4 small">
-            Tag : 
-            <div class="card bg-secondary text-white shadow p-1">
-                {{ $tanya->tag }}
-            </div>
+            Tag :     
+            @for ($i = 0; $i < count($tags);$i++)
+                <button class="btn btn-primary">{{$tags[$i]}}</button>
+            @endfor
         </div>
     </div>
     <a href="/pertanyaan" class="btn btn-primary"><< Kembali ke daftar pertanyaan</a>

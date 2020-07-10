@@ -42,14 +42,13 @@ class PertanyaanController extends Controller
     {
         //$tanya = PertanyaanModel::find_by_id($id);
         $tanya = Pertanyaan::find($id);
-
-        return view('pertanyaan.show', compact('tanya'));
+        $tags = explode("#",$tanya->tag);
+        return view('pertanyaan.show', compact('tanya','tags'));
     }
 
     public function edit($id) {
         //$tanya = PertanyaanModel::find_by_id($id);
         $tanya = Pertanyaan::find($id);
-
         return view('pertanyaan.edit', compact('tanya'));
     }
 
