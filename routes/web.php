@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware('auth');
+Route::get('/', 'PertanyaanController@index')->middleware('auth');
 
 Auth::routes();
 

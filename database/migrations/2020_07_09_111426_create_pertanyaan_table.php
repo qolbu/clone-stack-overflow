@@ -18,7 +18,7 @@ class CreatePertanyaanTable extends Migration
             $table->string('judul');
             $table->string('isi');
             $table->string('tag');
-            $table->integer('poin_vote')->nullable();
+            $table->integer('poin_vote')->nullable()->default(0);
             $table->timestamps();
         });
     }
