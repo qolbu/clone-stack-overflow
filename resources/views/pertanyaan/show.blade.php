@@ -8,11 +8,13 @@
         <div class="card-body">
             <p>{!! $tanya->isi !!}</p>
         </div>
-        <div class="col-sm-2 mb-4 small">
-            Tag :     
-            @for ($i = 0; $i < count($tags);$i++)
-                <button class="btn btn-primary">{{$tags[$i]}}</button>
-            @endfor
+        <div class="tags col-sm-6 mb-4 small">
+            Tag :
+            @php $i=1 @endphp    
+            @foreach ($tags as $value)
+                <a href="#" class="color{{$i}}">{{$value}}</a>
+                @php $i++ @endphp
+            @endforeach
         </div>
     </div>
     <a href="/pertanyaan" class="btn btn-primary"><< Kembali ke daftar pertanyaan</a>
