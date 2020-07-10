@@ -17,6 +17,7 @@
                     You are logged in!
                 </div>
             </div>
+            <a href="/pertanyaan" class="btn btn-primary mt-3">Lihat daftar pertanyaan</a>
         </div>
     </div>
 </div>
