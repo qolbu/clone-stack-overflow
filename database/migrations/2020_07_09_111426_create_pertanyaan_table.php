@@ -16,7 +16,7 @@ class CreatePertanyaanTable extends Migration
         Schema::create('pertanyaan', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('judul');
-            $table->string('isi');
+            $table->text('isi');
             $table->string('tag');
             $table->integer('poin_vote')->nullable()->default(0);
             $table->timestamps();

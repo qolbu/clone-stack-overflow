@@ -15,11 +15,11 @@ class CreateJawabanTable extends Migration
     {
         Schema::create('jawaban', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('isi');
+            $table->text('isi');
             $table->timestamps();
-            $table->unsignedBigInteger('user_id');
+            //$table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pertanyaan_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade');
         });
     }

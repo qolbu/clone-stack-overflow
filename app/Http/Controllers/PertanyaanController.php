@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pertanyaan;
+use App\Jawaban;
 
 class PertanyaanController extends Controller
 {
@@ -38,23 +39,22 @@ class PertanyaanController extends Controller
         return redirect('/pertanyaan');
     }
     
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //$tanya = PertanyaanModel::find_by_id($id);
+        $pertanyaan_id = $request['pertanyaan_id'];
         $tanya = Pertanyaan::find($id);
         $string = str_replace(' ', '', $tanya->tag);
         $tags = array_filter(explode(',',$string));
-        return view('pertanyaan.show', compact('tanya','tags'));
+        $jawab = Jawaban::all();
+        return view('pertanyaan.show', compact('tanya','tags', 'jawab'), ["pertanyaan_id"=>$pertanyaan_id]);
     }
 
     public function edit($id) {
-        //$tanya = PertanyaanModel::find_by_id($id);
         $tanya = Pertanyaan::find($id);
         return view('pertanyaan.edit', compact('tanya'));
     }
 
     public function update($id, Request $request) {
-        //$tanya = PertanyaanModel::update($id, $request->all());
         $messages = [
             "required" => ":attribute tidak boleh kosong!",
             "min" => ":attribute harus diisi minimal :min karakter!"
@@ -76,7 +76,6 @@ class PertanyaanController extends Controller
     }
 
     public function destroy($id) {
-        //$hapus = PertanyaanModel::destroy($id);
         $hapus = Pertanyaan::find($id);
 
         $hapus->delete();
