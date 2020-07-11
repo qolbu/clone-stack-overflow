@@ -28,7 +28,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="tag">Tag</label>
+                    <label for="tag">Tag (Diakhiri dengan koma)</label>
                     <input type="text" class="form-control" value="{{ $tanya->tag }}" placeholder="Tambahkan tag ..." name="tag" id="tag">
 
                     @if($errors->has('tag'))
@@ -51,6 +51,7 @@
 
 @push('scripts')
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+<script src="{{ asset('js/fm.tagator.jquery.js') }}"></script>
 <script>
   var editor_config = {
     path_absolute : "/",
@@ -86,5 +87,22 @@
   };
  
   tinymce.init(editor_config);
+</script>
+
+<script>
+    $(function () {
+        var $input_tagator1 = $('#tag');
+        
+        if ($input_tagator1.data('tagator') === undefined) {
+            $input_tagator1.tagator({
+                autocomplete: ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'],
+                useDimmer: true
+            });
+        } else {
+            $input_tagator1.tagator('destroy');
+        }
+       
+        
+    });
 </script>
 @endpush

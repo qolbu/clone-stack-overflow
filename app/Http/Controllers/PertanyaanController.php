@@ -43,7 +43,7 @@ class PertanyaanController extends Controller
         //$tanya = PertanyaanModel::find_by_id($id);
         $tanya = Pertanyaan::find($id);
         $string = str_replace(' ', '', $tanya->tag);
-        $tags = array_filter(explode('#',$string));
+        $tags = array_filter(explode(',',$string));
         return view('pertanyaan.show', compact('tanya','tags'));
     }
 

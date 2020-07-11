@@ -18,6 +18,7 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/larahub.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/fm.tagator.jquery.css') }}"/>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
