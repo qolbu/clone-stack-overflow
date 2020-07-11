@@ -1,39 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h4 class="m-0 font-weight-bold text-primary">{{ $tanya->judul }}</h4>
-        </div>
-        <div class="card-body">
-            <p>
-                <h6>
-                    Dibuat pada: {{ $tanya->created_at }}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Diperbarui pada: {{ $tanya->updated_at }}
-                </h6>
-            </p>
-            <hr>
-            <p>{!! $tanya->isi !!}</p>
-        </div>
-        <div class="tags col-sm-6 mb-4 small">
-            Tag :&nbsp;&nbsp;&nbsp;&nbsp;
-            @php $i=1 @endphp    
-            @foreach ($tags as $value)
-                <a href="#" class="color{{$i}}">{{$value}}</a>
-                @php $i++ @endphp
-            @endforeach
+<div class="row">
+    <div class="col-lg-1">
+        <div class="card shadow mb-4 text-center">
+        <a href="voteup" class="pvup"><img src="{{ asset('img/up-arrow.png') }}"></a>
+        <span class="vcount">0</span>
+        <a href="votedown" class="pvdown"><img src="{{ asset('img/down-arrow.png') }}"></a>
         </div>
     </div>
+    <div class="col-lg-11">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h4 class="m-0 font-weight-bold text-primary">{{ $tanya->judul }}</h4>
+            </div>
+            <div class="card-body">
+                <p>
+                    <h6>
+                        Dibuat pada: {{ $tanya->created_at }}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Diperbarui pada: {{ $tanya->updated_at }}
+                    </h6>
+                </p>
+                <hr>
+                <p>{!! $tanya->isi !!}</p>
+            </div>
+            <div class="tags col-sm-12 mb-4 small">
+                Tag :&nbsp;&nbsp;&nbsp;&nbsp;
+                @php $i=1 @endphp    
+                @foreach ($tags as $value)
+                    <a href="#" class="color{{$i}}">{{$value}}</a>
+                    @php $i++ @endphp
+                @endforeach
+            </div>
+        </div>
+    </div>
+</div>
     <h5 class="m-0 font-weight-bold text-primary mt-4 mb-1">Jawaban</h5>
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            @foreach ($jawab as $obj)
-                @if ($obj->pertanyaan_id == $tanya->id)
-                    {!! $obj->isi !!}
-                    <hr>
-                @endif
-            @endforeach
+    <div class="row">
+        <div class="col-lg-1">
+        <div class="card shadow mb-4 text-center">
+        <a href="voteup" class="pvup"><img src="{{ asset('img/up-arrow.png') }}"></a>
+        <span class="vcount">0</span>
+        <a href="votedown" class="pvdown"><img src="{{ asset('img/down-arrow.png') }}"></a>
+        </div>
+        </div>
+        <div class="col-lg-11">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    @foreach ($jawab as $obj)
+                        @if ($obj->pertanyaan_id == $tanya->id)
+                            {!! $obj->isi !!}
+                            <hr>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
     <h5 class="m-0 font-weight-bold text-primary mt-4 mb-1">Jawaban Anda</h5>
@@ -48,6 +70,7 @@
                 </div>
             @endif
         </div>
+        <input type="hidden" class="form-control" value="{{ $tanya->id }}" id="pertanyaan_id" name="pertanyaan_id">
         <input type="hidden" class="form-control" value="{{ $tanya->id }}" id="pertanyaan_id" name="pertanyaan_id">
         <button type="submit" style="width: auto" class="btn btn-primary btn-user btn-block">
             Jawab
@@ -98,21 +121,29 @@
   tinymce.init(editor_config);
 </script>
 
-<script>
-    $(function () {
-        var $input_tagator1 = $('#tag');
-        
-        if ($input_tagator1.data('tagator') === undefined) {
-            $input_tagator1.tagator({
-                autocomplete: ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'],
-                useDimmer: true
-            });
-        } else {
-            $input_tagator1.tagator('destroy');
+<script type="text/javascript">
+   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-       
-        
     });
+   
+    $(".vup").click(function(e){
+  
+        e.preventDefault();
+   
+        $.ajax({
+           type:'POST',
+           url:"",
+           data:{name:name, password:password, email:email},
+           success:function(data){
+              alert(data.success);
+           }
+        });
+  
+	});
 </script>
+
 
 @endpush
