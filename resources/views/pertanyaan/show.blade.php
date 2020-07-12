@@ -38,25 +38,24 @@
 </div>
     <h5 class="m-0 font-weight-bold text-primary mt-4 mb-1">Jawaban</h5>
     <div class="row">
-        <div class="col-lg-1">
-        <div class="card shadow mb-4 text-center">
-        <a href="voteup" class="pvup"><img src="{{ asset('img/up-arrow.png') }}"></a>
-        <span class="vcount">0</span>
-        <a href="votedown" class="pvdown"><img src="{{ asset('img/down-arrow.png') }}"></a>
-        </div>
-        </div>
-        <div class="col-lg-11">
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    @foreach ($jawab as $obj)
-                        @if ($obj->pertanyaan_id == $tanya->id)
-                            {!! $obj->isi !!}
-                            <hr>
-                        @endif
-                    @endforeach
+        @foreach ($jawab as $obj)
+            @if ($obj->pertanyaan_id == $tanya->id)
+                <div class="col-lg-1">
+                    <div class="card shadow mb-4 text-center">
+                        <a href="voteup" class="pvup"><img src="{{ asset('img/up-arrow.png') }}"></a>
+                        <span class="vcount">0</span>
+                        <a href="votedown" class="pvdown"><img src="{{ asset('img/down-arrow.png') }}"></a>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="col-lg-11">
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            {!! $obj->isi !!}                   
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
     </div>
     <h5 class="m-0 font-weight-bold text-primary mt-4 mb-1">Jawaban Anda</h5>
     <form action="/pertanyaan/{{ $tanya->id }}" method="POST">
