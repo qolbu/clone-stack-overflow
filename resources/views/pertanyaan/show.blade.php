@@ -71,7 +71,7 @@
             @endif
         </div>
         <input type="hidden" class="form-control" value="{{ $tanya->id }}" id="pertanyaan_id" name="pertanyaan_id">
-        <input type="hidden" class="form-control" value="{{ $tanya->id }}" id="pertanyaan_id" name="pertanyaan_id">
+        <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" id="user_id" name="user_id">
         <button type="submit" style="width: auto" class="btn btn-primary btn-user btn-block">
             Jawab
         </button>

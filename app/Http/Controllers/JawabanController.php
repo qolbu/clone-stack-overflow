@@ -19,6 +19,7 @@ class JawabanController extends Controller
         ], $messages);
         
         Jawaban::create([
+            "user_id" => $request["user_id"],
             "pertanyaan_id" => $request["pertanyaan_id"],
             "isi" => $request["isi"]
         ]);
