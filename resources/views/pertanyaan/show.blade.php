@@ -94,7 +94,11 @@
                 <div class="col-lg-11">
                     <div class="card shadow mb-4">
                         <div class="card-body">
-                            {!! $obj->isi !!}                   
+                            {!! $obj->isi !!}
+                            @if(Auth::user()->id==$obj->user_id)
+                            <button type="button" class="btn btn-sm btn-info open_modal" value="{{ $obj->id }}"><i class="fas fa-edit"></i></button>
+                            <a href="/delete/jawaban/{{ $obj->id }}" class="btn btn-sm btn-danger" onClick="Alertx()"><i class="fas fa-trash"></i></a>
+                            @endif                      
                         </div>
                         <div class="card-body">
                             <p>
@@ -171,6 +175,7 @@
 @push('scripts')
 <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 <script src="{{ asset('js/fm.tagator.jquery.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
   var editor_config = {
     path_absolute : "/",
@@ -231,6 +236,27 @@
   
 	});
 </script>
-
+<script>
+    function Alertx(){
+        Swal.fire({
+            title: 'Apakah Yakin Mau dihapus ?',
+            text: 'Anda akan menghapus data ini !!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Ya saya yakin',
+            cancelButtonText: 'Tidak',
+            closeOnConfirm: false,
+            closeOnCancel:false
+        },
+        function (isConfirm){
+            if(isConfirm){
+            swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
+        } else {
+            swal("Cancelled", "Your imaginary file is safe :)", "error");
+        }
+        });
+    }
+</script>
 
 @endpush

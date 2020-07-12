@@ -26,4 +26,10 @@ class JawabanController extends Controller
 
             return redirect()->back();
     }
+
+    public function destroy($id){
+        $hapus = Jawaban::find($id);
+        $hapus->delete();
+        return redirect()->back();
+    }
 }

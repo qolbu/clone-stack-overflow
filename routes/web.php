@@ -24,7 +24,7 @@ Route::middleware('auth')->get('/pertanyaan/{id}', 'PertanyaanController@show');
 Route::middleware('auth')->get('/pertanyaan/{id}/edit', 'PertanyaanController@edit');
 Route::middleware('auth')->put('/pertanyaan/{id}', 'PertanyaanController@update');
 Route::middleware('auth')->delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
-
+Route::middleware('auth')->get('/delete/jawaban/{id}', 'JawabanController@destroy');
 Route::middleware('auth')->post('/jawaban/{pertanyaan_id}', 'JawabanController@store');
 
 Route::middleware('auth')->post('/komentarpertanyaan/{pertanyaan_id}', 'KomentarPertanyaanController@store');
