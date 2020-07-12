@@ -8,7 +8,7 @@ class Pertanyaan extends Model
 {
     protected $table = "pertanyaan";
 
-    protected $fillable = ["user_id","judul", "isi", "tag"];
+    protected $fillable = ["user_id", "judul", "isi", "tag"];
 
     protected $guarded = [];
 }

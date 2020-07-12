@@ -12,7 +12,7 @@
     <div class="col-lg-11">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h4 class="m-0 font-weight-bold text-primary">{{ $tanya->judul }}</h4>
+                <h4 class="m-0 font-weight-bold text-primary" title="{{ $tanya->judul }}">{{ $tanya->judul }}</h4>
             </div>
             <div class="card-body">
                 <p>
@@ -25,18 +25,62 @@
                 <hr>
                 <p>{!! $tanya->isi !!}</p>
             </div>
-            <div class="tags col-sm-12 mb-4 small">
+            <div class="tags card-body">
                 Tag :&nbsp;&nbsp;&nbsp;&nbsp;
                 @php $i=1 @endphp    
                 @foreach ($tags as $value)
-                    <a href="#" class="color{{$i}}">{{$value}}</a>
-                    @php $i++ @endphp
+                <a href="#" class="color{{$i}}">{{$value}}</a>
+                @php $i++ @endphp
                 @endforeach
+            </div>
+            <div class="card-body">
+                <p>
+                    Ditanyakan oleh: 
+                    @foreach ($user as $u)
+                        @if ($u->id == $tanya->user_id)
+                        <a href="#" title="{{ $u->name }}">
+                                {{ $u->name }}
+                        @endif
+                    @endforeach
+                    </a>
+                </p>
+            </div>
+            <div class="card-footer small">
+                @foreach ($komen_tanya as $kt)
+                    @if ($kt->pertanyaan_id  == $tanya->id)
+                        {!! $kt->isi !!} -
+                        @foreach ($user as $u)
+                            @if ($u->id == $kt->user_id)
+                            <a href="#" title="{{ $u->name }}">
+                                    {{ $u->name }}
+                            @endif
+                        @endforeach
+                        </a>
+                        <hr>
+                    @endif
+                @endforeach
+                <form action="/komentarpertanyaan/{{ $tanya->id }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <textarea class="form-control my-editor" placeholder="tambahkan komentar ..." name="isi" id="isi" rows="3"></textarea>
+            
+                        @if($errors->has('isi'))
+                            <div class="text-danger">
+                                {{ $errors->first('isi')}}
+                            </div>
+                        @endif
+                    </div>
+                    <input type="hidden" class="form-control" value="{{ $tanya->id }}" id="pertanyaan_id" name="pertanyaan_id">
+                    <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" id="user_id" name="user_id">
+                    <button type="submit" style="width: auto" class="btn btn-primary btn-user btn-block">
+                        Beri komentar
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-    <h5 class="m-0 font-weight-bold text-primary mt-4 mb-1">Jawaban</h5>
+    <h5 class="m-0 font-weight-bold text-primary mt-4 mb-2">Jawaban</h5>
     <div class="row">
         @foreach ($jawab as $obj)
             @if ($obj->pertanyaan_id == $tanya->id)
@@ -52,13 +96,57 @@
                         <div class="card-body">
                             {!! $obj->isi !!}                   
                         </div>
+                        <div class="card-body">
+                            <p>
+                                Dijawab oleh: 
+                                @foreach ($user as $u)
+                                    @if ($u->id == $obj->user_id)
+                                    <a href="#" title="{{ $u->name }}">
+                                            {{ $u->name }}
+                                    @endif
+                                @endforeach
+                                </a>
+                            </p>
+                        </div>
+                        <div class="card-footer small">
+                            @foreach ($komen_jawab as $kj)
+                                @if ($kj->jawaban_id  == $obj->id)
+                                    {!! $kj->isi !!} -
+                                    @foreach ($user as $u)
+                                        @if ($u->id == $kj->user_id)
+                                        <a href="#" title="{{ $u->name }}">
+                                                {{ $u->name }}
+                                        @endif
+                                    @endforeach
+                                    </a>
+                                    <hr>
+                                @endif
+                            @endforeach
+                            <form action="/komentarjawaban/{{ $obj->id }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <textarea class="form-control my-editor" placeholder="tambahkan komentar ..." name="isi" id="isi" rows="3"></textarea>
+                        
+                                    @if($errors->has('isi'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('isi')}}
+                                        </div>
+                                    @endif
+                                </div>
+                                <input type="hidden" class="form-control" value="{{ $obj->id }}" id="jawaban_id" name="jawaban_id">
+                                <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" id="user_id" name="user_id">
+                                <button type="submit" style="width: auto" class="btn btn-primary btn-user btn-block">
+                                    Beri komentar
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             @endif
         @endforeach
     </div>
     <h5 class="m-0 font-weight-bold text-primary mt-4 mb-1">Jawaban Anda</h5>
-    <form action="/pertanyaan/{{ $tanya->id }}" method="POST">
+    <form action="/jawaban/{{ $tanya->id }}" method="POST">
         @csrf
         <div class="form-group">
             <textarea class="form-control my-editor" placeholder="Tulis jawaban ..." name="isi" id="isi" rows="6"></textarea>

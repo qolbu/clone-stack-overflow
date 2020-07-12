@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pertanyaan;
 use App\Jawaban;
+use App\KomentarPertanyaan;
+use App\KomentarJawaban;
+use App\User;
 
 class PertanyaanController extends Controller
 {
@@ -44,11 +47,16 @@ class PertanyaanController extends Controller
     public function show($id, Request $request)
     {
         $pertanyaan_id = $request['pertanyaan_id'];
+        $jawaban_id = $request['jawaban_id'];
         $tanya = Pertanyaan::find($id);
         $string = str_replace(' ', '', $tanya->tag);
         $tags = array_filter(explode(',',$string));
         $jawab = Jawaban::all();
-        return view('pertanyaan.show', compact('tanya','tags', 'jawab'), ["pertanyaan_id"=>$pertanyaan_id]);
+        $komen_tanya = KomentarPertanyaan::all();
+        $komen_jawab = KomentarJawaban::all();
+        $user = User::all();
+        //dd($komen_tanya);
+        return view('pertanyaan.show', compact('tanya', 'tags', 'jawab', 'komen_tanya', 'komen_jawab', 'user'), ["pertanyaan_id" => $pertanyaan_id]);
     }
 
     public function edit($id) {

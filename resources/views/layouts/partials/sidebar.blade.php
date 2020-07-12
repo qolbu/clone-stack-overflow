@@ -30,8 +30,8 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="buttons.html">Ajukan Pertanyaan</a>
-            <a class="collapse-item" href="cards.html">Cari Pertanyaan</a>
+            <a class="collapse-item" href="/pertanyaan/create">Ajukan Pertanyaan</a>
+            <a class="collapse-item" href="/pertanyaan">Cari Pertanyaan</a>
           </div>
         </div>
       </li>
