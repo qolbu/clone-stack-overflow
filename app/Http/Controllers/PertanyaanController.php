@@ -25,12 +25,14 @@ class PertanyaanController extends Controller
         ];
 
         $this->validate($request, [
+            "user_id" => "required",
             "judul" => "required|min:5",
             "isi" => "required|min:5",
             "tag" => "required"
         ], $messages);
         
         Pertanyaan::create([
+            "user_id" => $request["user_id"],
             "judul" => $request["judul"],
             "isi" => $request["isi"],
             "tag" => $request["tag"]

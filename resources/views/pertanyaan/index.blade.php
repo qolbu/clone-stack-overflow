@@ -19,6 +19,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                        $us_id = Auth::user()->id
+                        @endphp
                         @foreach ($pertanyaan as $key => $value)
                             <tr>
                                 <td>{{ $key+1 }}</td>
@@ -27,12 +30,14 @@
                                 <td>{{ $value->tag }}</td>
                                 <td>
                                     <a href="/pertanyaan/{{ $value->id }}" class="btn btn-sm btn-info">Tampilkan</a>
+                                    @if($us_id==$value->user_id)
                                     <a href="/pertanyaan/{{ $value->id }}/edit" class="btn btn-sm btn-secondary">Sunting</a>
                                     <form action="/pertanyaan/{{ $value->id }}" method="POST" style="display: inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" onClick="AlertMsg();"><i class="fas fa-trash"></i></button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

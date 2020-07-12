@@ -39,6 +39,7 @@
                         </div>
                     @endif
                 </div>
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <button type="submit" style="width: auto" class="btn btn-primary btn-user btn-block">
                     Buat pertanyaan
                 </button>

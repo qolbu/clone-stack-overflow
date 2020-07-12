@@ -17,9 +17,9 @@ class CreateJawabanTable extends Migration
             $table->bigIncrements('id');
             $table->text('isi');
             $table->timestamps();
-            //$table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pertanyaan_id');
-            //$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('pertanyaan_id')->references('id')->on('pertanyaan')->onDelete('cascade');
         });
     }
