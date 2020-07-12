@@ -170,6 +170,19 @@
     <div>
         <a href="/pertanyaan" class="btn btn-info my-2"><< Kembali ke daftar pertanyaan</a>
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Jawaban</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    tes
+                </div> 
+            </div>
+        </div>        
+    </div>
 @endsection
 
 @push('scripts')
@@ -235,6 +248,11 @@
         });
   
 	});
+</script>
+<script>
+    $(document).on('click','.open_modal',function(){
+        $('#myModal').modal('show');
+    });
 </script>
 <script>
     function Alertx(){
