@@ -4,9 +4,9 @@
 <div class="row">
     <div class="col-lg-1">
         <div class="card shadow mb-4 text-center">
-        <a href="voteup" class="pvup"><img src="{{ asset('img/up-arrow.png') }}"></a>
+        <a href="voteup" class="pvup {{$tanya->id}}"><img src="{{ asset('img/up-arrow.png') }}"></a>
         <span class="vcount">0</span>
-        <a href="votedown" class="pvdown"><img src="{{ asset('img/down-arrow.png') }}"></a>
+        <a href="votedown" class="pvdown {{$tanya->id}}"><img src="{{ asset('img/down-arrow.png') }}"></a>
         </div>
     </div>
     <div class="col-lg-11">
@@ -86,9 +86,9 @@
             @if ($obj->pertanyaan_id == $tanya->id)
                 <div class="col-lg-1">
                     <div class="card shadow mb-4 text-center">
-                        <a href="voteup" class="pvup"><img src="{{ asset('img/up-arrow.png') }}"></a>
+                        <a href="voteup" class="pvup {{$obj->id}}"><img src="{{ asset('img/up-arrow.png') }}"></a>
                         <span class="vcount">0</span>
-                        <a href="votedown" class="pvdown"><img src="{{ asset('img/down-arrow.png') }}"></a>
+                        <a href="votedown" class="pvdown {{$obj->id}}"><img src="{{ asset('img/down-arrow.png') }}"></a>
                     </div>
                 </div>
                 <div class="col-lg-11">
@@ -277,4 +277,46 @@
     }
 </script>
 
+<script type="text/javascript">
+   
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(".pvup").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        // pertanyaan_id atau jawaban_id
+        var pj_id = $(this).attr('class').replace('pvup ', '');
+        alert(pj_id);
+        $.ajax({
+           type:'POST',
+           url:"",
+           data:{name:name, password:password, email:email},
+           success:function(data){
+              alert(data.success);
+           }
+        });
+	});
+
+    $(".pvdown").click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        // pertanyaan_id atau jawaban_id
+        var pj_id = $(this).attr('class').replace('pvdown ', '');
+        alert(pj_id);
+        $.ajax({
+            type:'POST',
+            url:"",
+            data:{name:name, password:password, email:email},
+            success:function(data){
+                alert(data.success);
+            }
+        });
+    });
+</script>
 @endpush
